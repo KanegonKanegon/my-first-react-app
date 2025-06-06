@@ -5,6 +5,7 @@ const App: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [step, setStep] = useState<number>(1);
   const [countstar, setCountstar] = useState<number>(0);
+  const [errorstar, setErrorstar] = useState<string>("");
 
   // カウントを増やす
   const increment = () => setCount(count + step);
@@ -41,11 +42,19 @@ const App: React.FC = () => {
         /> 
       </div>
       <div>
-        <h1>星の表示</h1>
+        <h1>このアプリの評価(1~5段階)</h1>
         <input
         type="number"
         value={countstar}
-        onChange={(e) => setCountstar(Number(e.target.value))}
+        onChange={(e) => {
+          const val=Number(e.target.value)
+          if (!isNaN(val) && val<=5) {
+            setErrorstar("");
+            setCountstar(val);
+          } else{
+            setErrorstar("正しい数字入れろバーカ");
+          }
+        }}
         />
         <p
         style={{
@@ -55,6 +64,9 @@ const App: React.FC = () => {
           wordBreak: 'break-all',
           margin: '0 auto',
         }}>{writestar(countstar)}</p> {/*ここでwritestarを使った値starsを呼び出す*/}
+        {errorstar && (
+          <p style={{color: "red"}}>{errorstar}</p>
+        )}
       </div>
     </div>
   );
