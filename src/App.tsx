@@ -27,8 +27,8 @@ const App: React.FC = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>カウンターアプリ</h1>
-      <p>カウント: {count}</p>
+      <h1>善行カウンターアプリ</h1>
+      <p>善行カウント: {count}</p>
       <button onClick={decrement}>− 減らす</button>
       <button onClick={increment} style={{ marginLeft: '10px' }}>＋ 増やす</button>
       <div>
@@ -48,7 +48,7 @@ const App: React.FC = () => {
         value={countstar}
         onChange={(e) => {
           const val=Number(e.target.value)
-          if (!isNaN(val) && val<=5) {
+          if (!isNaN(val) && val<=5 && val>0) {
             setErrorstar("");
             setCountstar(val);
           } else{
