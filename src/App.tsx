@@ -30,6 +30,9 @@ const App: React.FC = () => {
     setCount(0);
   };
 
+  //ポイントの累計
+  const totalPoints = deeds.reduce((sum, deed) => sum+deed.point, 0)
+
   // カウントを増やす
   const increment = () => setCount(count + step);
 
@@ -51,7 +54,12 @@ const App: React.FC = () => {
   return (
     <div style={{ textAlign: 'center', marginTop: '50px', paddingBottom: '150px'}}>
       <h1>善行カウンターアプリ</h1>
-      <p>累計善行ポイント: </p>
+      <p>累計善行ポイント: {totalPoints}</p>
+      {totalPoints > 0 && totalPoints % 10 === 0 &&(
+        <p style={{ color: "green", fontWeight: "bold"}}>
+        🎉 おめでとう！{totalPoints}ポイント達成！ 🎉
+        </p>
+      )}
       <p>善行の内容: {goodeed}</p>
       <p>善行カウント: {count}</p>
       <button onClick={decrement}>− 減らす</button>
